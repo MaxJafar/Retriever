@@ -9,6 +9,7 @@ import subprocess
 import tomllib
 import xml.etree.ElementTree as ET
 from notices import collect
+from check_media import check as check_media
 
 def sha(path):
     with path.open("rb") as f:
@@ -68,6 +69,7 @@ def main():
     for name in required:
         shutil.copy2(media / name, engine / name)
     shutil.copy2(media / "media-runtime.json", engine)
+    check_media(engine, args.platform, output / "media-check")
     collect(root, resources / "notices", args.platform)
     shutil.copytree(media / "notices", resources / "notices", dirs_exist_ok=True)
     shutil.copy2(root / "release/PREVIEW-NOTICE.txt", resources)

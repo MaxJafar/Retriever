@@ -14,6 +14,7 @@ import tarfile
 import urllib.request
 
 FFMPEG_SHA = "b6863adde98898f42602017462871b5f6333e65aec803fdd7a6308639c52edf3"
+ZLIB_SHA = "bb329a0a2cd0274d05519d61c667c062e06990d72e125ee2dfa8de64f0119d16"
 PDFIUM = {
     "windows-x64": ("pdfium-win-x64.tgz", "55329d5cb5de8a379a2fc563106492d7f385a1f795d18970922c71f708f9fbb4", "pdfium.dll"),
     "macos-arm64": ("pdfium-mac-arm64.tgz", "e214ee33f22b2204daa765a545aee1e425d88448e6154dac95c6a06206b7437f", "libpdfium.dylib"),
@@ -42,20 +43,39 @@ def main():
     root = args.output.resolve(); root.mkdir(parents=True, exist_ok=True)
     source = root / "build"; source.mkdir(exist_ok=True)
     notices = root / "notices"; notices.mkdir(exist_ok=True)
+    zarchive = source / "zlib-1.3.2.tar.gz"
+    fetch("https://zlib.net/fossils/zlib-1.3.2.tar.gz", zarchive, ZLIB_SHA)
+    zwork = source / "zlib-1.3.2"
+    if not (zwork / "zlib.h").exists():
+        with tarfile.open(zarchive) as tar:
+            tar.extractall(source, filter="data")
+    zenv = dict(os.environ)
+    with (root / "zlib-build.log").open("w") as log:
+        if args.platform == "windows-x64":
+            subprocess.run(["make", "-f", "win32/Makefile.gcc", "PREFIX=x86_64-w64-mingw32-", "-j", "2", "libz.a"], cwd=zwork, env=zenv, check=True, stdout=log, stderr=subprocess.STDOUT)
+        else:
+            zenv["MACOSX_DEPLOYMENT_TARGET"] = "14.0"
+            zenv["CFLAGS"] = "-O3 -mmacosx-version-min=14.0"
+            subprocess.run(["sh", "configure", "--static"], cwd=zwork, env=zenv, check=True, stdout=log, stderr=subprocess.STDOUT)
+            subprocess.run(["make", "-j", "2", "libz.a"], cwd=zwork, env=zenv, check=True, stdout=log, stderr=subprocess.STDOUT)
+    znotice = notices / "zlib"; znotice.mkdir(exist_ok=True)
+    shutil.copy2(zarchive, znotice)
+    shutil.copy2(zwork / "LICENSE", znotice)
     ffmpeg = source / "ffmpeg-8.1.1.tar.xz"
     fetch("https://ffmpeg.org/releases/ffmpeg-8.1.1.tar.xz", ffmpeg, FFMPEG_SHA)
     if not (source / "ffmpeg-8.1.1/configure").exists():
         with tarfile.open(ffmpeg) as tar:
             tar.extractall(source, filter="data")
     work = source / "ffmpeg-8.1.1"
-    flags = ["--disable-autodetect", "--disable-network", "--disable-doc", "--disable-debug", "--disable-ffplay", "--disable-gpl", "--disable-nonfree", "--disable-shared", "--enable-static", "--disable-x86asm"]
+    zinclude = os.path.relpath(zwork, work)
+    flags = ["--disable-autodetect", "--disable-network", "--disable-doc", "--disable-debug", "--disable-ffplay", "--disable-gpl", "--disable-nonfree", "--disable-shared", "--enable-static", "--disable-x86asm", "--enable-zlib"]
     env = dict(os.environ)
     if args.platform == "windows-x64":
-        flags += ["--target-os=mingw32", "--arch=x86_64", "--enable-cross-compile", "--cross-prefix=x86_64-w64-mingw32-", "--extra-ldflags=-static", "--pkg-config=false"]
+        flags += ["--target-os=mingw32", "--arch=x86_64", "--enable-cross-compile", "--cross-prefix=x86_64-w64-mingw32-", "--extra-cflags=-I" + zinclude, "--extra-ldflags=-static -L" + zinclude, "--pkg-config=false"]
     else:
         env["MACOSX_DEPLOYMENT_TARGET"] = "14.0"
         sdk = subprocess.check_output(["xcrun", "--sdk", "macosx", "--show-sdk-path"], text=True).strip()
-        flags += ["--arch=arm64", "--target-os=darwin", "--cc=" + subprocess.check_output(["xcrun", "--find", "clang"], text=True).strip(), "--sysroot=" + sdk, "--extra-cflags=-mmacosx-version-min=14.0", "--extra-ldflags=-mmacosx-version-min=14.0"]
+        flags += ["--arch=arm64", "--target-os=darwin", "--cc=" + subprocess.check_output(["xcrun", "--find", "clang"], text=True).strip(), "--sysroot=" + sdk, "--extra-cflags=-mmacosx-version-min=14.0 -I" + zinclude, "--extra-ldflags=-mmacosx-version-min=14.0 -L" + zinclude]
     suffix = ".exe" if args.platform == "windows-x64" else ""
     try:
         with (root / "build.log").open("w") as log:
@@ -73,7 +93,9 @@ def main():
     # Complete corresponding source and the exact recipe accompany each binary.
     shutil.copy2(ffmpeg, ffnotice / ffmpeg.name)
     shutil.copy2(__file__, ffnotice / "rebuild.py")
-    (ffnotice / "configure-arguments.json").write_text(json.dumps(flags, indent=2) + "\n")
+    # Keep recipes reproducible without embedding the build host's paths.
+    recipe = [flag.replace(str(zwork), "${ZLIB_SOURCE}").replace(sdk, "${MACOS_SDK}") if args.platform == "macos-arm64" else flag.replace(str(zwork), "${ZLIB_SOURCE}") for flag in flags]
+    (ffnotice / "configure-arguments.json").write_text(json.dumps(recipe, indent=2) + "\n")
     filename, sha, binary = PDFIUM[args.platform]
     pdfarchive = source / filename
     fetch("https://github.com/bblanchon/pdfium-binaries/releases/download/chromium/7999/" + filename, pdfarchive, sha)
@@ -93,7 +115,7 @@ def main():
                 shutil.copy2(copyright_file, mingw / (name + ".txt"))
         if not list(mingw.iterdir()):
             raise ValueError("MinGW runtime attribution is required")
-    manifest = {"platform": args.platform, "ffmpeg": "8.1.1", "ffmpeg_license": "LGPL-2.1-or-later", "ffmpeg_source_sha256": FFMPEG_SHA, "pdfium": "153.0.7999.0", "files": [{"name": n, "bytes": (root/n).stat().st_size, "sha256": digest(root/n)} for n in names]}
+    manifest = {"platform": args.platform, "ffmpeg": "8.1.1", "ffmpeg_license": "LGPL-2.1-or-later", "ffmpeg_source_sha256": FFMPEG_SHA, "zlib": "1.3.2", "zlib_source_sha256": ZLIB_SHA, "pdfium": "153.0.7999.0", "files": [{"name": n, "bytes": (root/n).stat().st_size, "sha256": digest(root/n)} for n in names]}
     (root / "media-runtime.json").write_text(json.dumps(manifest, indent=2) + "\n")
     print(json.dumps({"platform": args.platform, "files": len(names), "output": str(root)}))
 

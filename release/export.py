@@ -13,7 +13,7 @@ EXPLICIT = [
     "docs/building.md", "docs/releasing.md", "docs/updates.md", "docs/architecture.md",
     ".github/workflows/native.yml", ".github/workflows/release.yml", ".github/dependabot.yml",
     ".github/ISSUE_TEMPLATE/bug_report.yml", ".github/ISSUE_TEMPLATE/feature_request.yml",
-    "release/export.py", "release/smoke.py", "release/build.py", "release/notices.py", "release/media.py", "release/windows-runtime.ps1",
+    "release/export.py", "release/smoke.py", "release/build.py", "release/notices.py", "release/media.py", "release/check_media.py", "release/windows-runtime.ps1",
     "release/repository.json", "release/PREVIEW-NOTICE.txt", "release/validate.py", "release/test_release.py", "release/macos-entitlements.plist",
     "retriever-rs/Cargo.toml", "retriever-rs/Cargo.lock",
     "retriever-rs/crates/embedding-native/build.rs", "retriever-rs/crates/embedding-native/bridge.cpp",

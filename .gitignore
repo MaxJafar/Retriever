@@ -153,6 +153,7 @@
 !/retriever-rs/tests/fixtures/drive-health.json
 !/retriever-rs/tests/fixtures/disk-capacity.json
 !/release/smoke.py
+!/release/check_media.py
 !/retriever-source-manifest.json
 !/release/rust-notices/
 !/release/rust-notices/**

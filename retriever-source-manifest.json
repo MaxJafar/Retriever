@@ -33,8 +33,8 @@
     },
     {
       "path": ".gitignore",
-      "bytes": 4261,
-      "sha256": "0510af44f4e872311a49c75589a7e9aaa98eeda9fdbf87a3b9a7c81106ba98e8"
+      "bytes": 4286,
+      "sha256": "1566042482e4f25398ac1c37f346e86151ef6673d627bc9439e29645eb705508"
     },
     {
       "path": "CHANGELOG.md",
@@ -403,13 +403,18 @@
     },
     {
       "path": "release/build.py",
-      "bytes": 7150,
-      "sha256": "2b8dea2766e55c5c4bda462e2b406f063b17caafe19f62a58269c790eba57375"
+      "bytes": 7258,
+      "sha256": "8b8feebae9166dffdc176a867619f3da79889c4a098d4d861c1fd8999931a84f"
+    },
+    {
+      "path": "release/check_media.py",
+      "bytes": 3735,
+      "sha256": "728e07ea3ed9e48745b0bd2b275764600e3fa430439f71372c066086902cce9e"
     },
     {
       "path": "release/export.py",
-      "bytes": 6242,
-      "sha256": "8af25f3e4e580a0bcc4b16317f4da2b2a40cae354557ccc1a679c71f8e020fd9"
+      "bytes": 6268,
+      "sha256": "b212759a17cadcf786cc48eb0b654159928db79ebc3301bb2c5432fce04b3002"
     },
     {
       "path": "release/macos-entitlements.plist",
@@ -418,8 +423,8 @@
     },
     {
       "path": "release/media.py",
-      "bytes": 5640,
-      "sha256": "bcba50d03c20849cff63a1d18e6abb536d18def361bdf607203349e7efe97053"
+      "bytes": 7294,
+      "sha256": "274d40985909eb73715f4a2f56d61cee1ec4ef4bcb23b71d2a7eb219531dfd41"
     },
     {
       "path": "release/notices.py",
