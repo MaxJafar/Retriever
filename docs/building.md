@@ -8,7 +8,9 @@ and optional model conversion. It is not installed with the app.
 - Rust 1.97.1 (the version used by CI), CMake 3.25+ and a C++17 compiler.
 - Windows x64: Visual Studio 2022 C++ build tools, Windows SDK, .NET 10 SDK,
   PowerShell 7 and Inno Setup 6 for installers.
-- Apple Silicon: macOS 14+, Xcode command-line tools, Swift and Python 3.11+.
+- Apple Silicon: macOS 14+, Xcode 26 command-line tools (macOS 26 SDK), Swift
+  and Python 3.11+. The app still runs on macOS 14; the newer SDK is needed to
+  compile the optional Liquid Glass view. CI selects Xcode 26.3 explicitly.
 
 The llama.cpp sources are vendored at the revision in
 `retriever-rs/vendor/llama.cpp/RETRIEVER-PROVENANCE.txt`. `Cargo.lock` pins Rust

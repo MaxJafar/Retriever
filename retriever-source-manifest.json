@@ -23,13 +23,13 @@
     },
     {
       "path": ".github/workflows/native.yml",
-      "bytes": 2815,
-      "sha256": "ab2dc9822b5ad3ae1de396ff13638254a1019c21391c84de343a9cc75720c76d"
+      "bytes": 3002,
+      "sha256": "a71e2a061406b8c1025b729eb5aecf24668f7c86f6534c952bcf9dd6059c7970"
     },
     {
       "path": ".github/workflows/release.yml",
-      "bytes": 6683,
-      "sha256": "920d918a1109b36e161b887a477aace9995ed35230c6c49c975db684fb02bc64"
+      "bytes": 6752,
+      "sha256": "ad10642cc5413da374b91a90b6d22be6a7205e878cbb3501e7694a469a4df577"
     },
     {
       "path": ".gitignore",
@@ -53,8 +53,8 @@
     },
     {
       "path": "docs/building.md",
-      "bytes": 3959,
-      "sha256": "6333ef78f4b5fedddc1feb8cc92a3b1822e540f986670e82061ed90267d91c60"
+      "bytes": 4114,
+      "sha256": "4f3358f036d0cc79816815d1e508b8c8a4ff02ebdf7ec23377179e4123f54a37"
     },
     {
       "path": "docs/releasing.md",
@@ -423,8 +423,8 @@
     },
     {
       "path": "release/media.py",
-      "bytes": 7294,
-      "sha256": "274d40985909eb73715f4a2f56d61cee1ec4ef4bcb23b71d2a7eb219531dfd41"
+      "bytes": 7764,
+      "sha256": "3e341bbacefdafff870056b07198aa9d753e98b994d19d8d431e00dee969bf12"
     },
     {
       "path": "release/notices.py",

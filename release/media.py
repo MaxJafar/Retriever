@@ -9,6 +9,7 @@ import json
 import os
 from pathlib import Path
 import shutil
+import shlex
 import subprocess
 import tarfile
 import urllib.request
@@ -55,9 +56,11 @@ def main():
             subprocess.run(["make", "-f", "win32/Makefile.gcc", "PREFIX=x86_64-w64-mingw32-", "-j", "2", "libz.a"], cwd=zwork, env=zenv, check=True, stdout=log, stderr=subprocess.STDOUT)
         else:
             zenv["MACOSX_DEPLOYMENT_TARGET"] = "14.0"
-            zenv["CFLAGS"] = "-O3 -mmacosx-version-min=14.0"
+            zenv["SDKROOT"] = subprocess.check_output(["xcrun", "--sdk", "macosx", "--show-sdk-path"], text=True).strip()
+            zenv["CC"] = subprocess.check_output(["xcrun", "--find", "clang"], text=True).strip()
+            zenv["CFLAGS"] = "-O3 -mmacosx-version-min=14.0 -isysroot " + shlex.quote(zenv["SDKROOT"])
             subprocess.run(["sh", "configure", "--static"], cwd=zwork, env=zenv, check=True, stdout=log, stderr=subprocess.STDOUT)
-            subprocess.run(["make", "-j", "2", "libz.a"], cwd=zwork, env=zenv, check=True, stdout=log, stderr=subprocess.STDOUT)
+            subprocess.run(["make", "-B", "-j", "2", "libz.a"], cwd=zwork, env=zenv, check=True, stdout=log, stderr=subprocess.STDOUT)
     znotice = notices / "zlib"; znotice.mkdir(exist_ok=True)
     shutil.copy2(zarchive, znotice)
     shutil.copy2(zwork / "LICENSE", znotice)
@@ -75,6 +78,9 @@ def main():
     else:
         env["MACOSX_DEPLOYMENT_TARGET"] = "14.0"
         sdk = subprocess.check_output(["xcrun", "--sdk", "macosx", "--show-sdk-path"], text=True).strip()
+        env["SDKROOT"] = sdk
+        host_flags = "-mmacosx-version-min=14.0 -isysroot " + shlex.quote(sdk)
+        flags += ["--host-cflags=" + host_flags, "--host-ldflags=" + host_flags]
         flags += ["--arch=arm64", "--target-os=darwin", "--cc=" + subprocess.check_output(["xcrun", "--find", "clang"], text=True).strip(), "--sysroot=" + sdk, "--extra-cflags=-mmacosx-version-min=14.0 -I" + zinclude, "--extra-ldflags=-mmacosx-version-min=14.0 -L" + zinclude]
     suffix = ".exe" if args.platform == "windows-x64" else ""
     try:
