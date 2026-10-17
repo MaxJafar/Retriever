@@ -32,7 +32,7 @@ walkdir.workspace = true
 zip.workspace = true
 retriever-protocol.workspace = true
 retriever-embedding-native = { path = "../embedding-native" }
-ort = { version = "=2.0.0-rc.10", default-features = false, features = ["std", "load-dynamic"] }
+ort = { version = "=2.0.0-rc.14", default-features = false, features = ["std", "load-dynamic"] }
 tokenizers = { version = "0.22", default-features = false, features = ["fancy-regex"] }
 [target.'cfg(unix)'.dependencies]
 libc = "0.2"
