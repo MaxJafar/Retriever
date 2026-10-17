@@ -11,6 +11,9 @@ Windows opens the verified installer and quits Retriever after its local engine
 checkpoints and stops. The installer creates a versioned app directory and
 updates Start-menu shortcuts. Select **Open Retriever** at the end. Older app
 directories are retained for rollback; application data is outside them.
+If Retriever already owns folder integration, the installer retargets that
+recorded handler while retaining its original restore values. Newer choices
+made by another app are preserved.
 
 Mac opens the verified disk image after its local engine checkpoints and stops.
 Drag Retriever into Applications, replace the previous app and reopen it. This is

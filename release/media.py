@@ -56,10 +56,14 @@ def main():
         env["MACOSX_DEPLOYMENT_TARGET"] = "14.0"
         sdk = subprocess.check_output(["xcrun", "--sdk", "macosx", "--show-sdk-path"], text=True).strip()
         flags += ["--arch=arm64", "--target-os=darwin", "--cc=" + subprocess.check_output(["xcrun", "--find", "clang"], text=True).strip(), "--sysroot=" + sdk, "--extra-cflags=-mmacosx-version-min=14.0", "--extra-ldflags=-mmacosx-version-min=14.0"]
-    with (root / "build.log").open("w") as log:
-        subprocess.run(["sh", "configure", *flags], cwd=work, env=env, check=True, stdout=log, stderr=subprocess.STDOUT)
-        subprocess.run(["make", "-j", str(min(4, os.cpu_count() or 2)), "ffmpeg", "ffprobe"], cwd=work, env=env, check=True, stdout=log, stderr=subprocess.STDOUT)
     suffix = ".exe" if args.platform == "windows-x64" else ""
+    try:
+        with (root / "build.log").open("w") as log:
+            subprocess.run(["sh", "configure", *flags], cwd=work, env=env, check=True, stdout=log, stderr=subprocess.STDOUT)
+            subprocess.run(["make", "-j", str(min(4, os.cpu_count() or 2)), "ffmpeg" + suffix, "ffprobe" + suffix], cwd=work, env=env, check=True, stdout=log, stderr=subprocess.STDOUT)
+    except subprocess.CalledProcessError:
+        print((root / "build.log").read_text(errors="replace")[-12000:], flush=True)
+        raise
     names = ["ffmpeg" + suffix, "ffprobe" + suffix]
     for name in names:
         shutil.copy2(work / name, root / name)

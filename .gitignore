@@ -156,3 +156,7 @@
 !/retriever-source-manifest.json
 !/release/rust-notices/
 !/release/rust-notices/**
+!/native/retriever-windows-tests/
+/native/retriever-windows-tests/**
+!/native/retriever-windows-tests/*.cs
+!/native/retriever-windows-tests/*.csproj

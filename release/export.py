@@ -21,6 +21,7 @@ EXPLICIT = [
     "retriever-rs/tests/fixtures/drive-health.json", "retriever-rs/tests/fixtures/disk-capacity.json",
 ]
 PATTERNS = [
+    "native/retriever-windows-tests/*.cs", "native/retriever-windows-tests/*.csproj",
     "release/rust-notices/**/*",
     "retriever-rs/crates/*/Cargo.toml", "retriever-rs/crates/*/src/**/*.rs", "retriever-rs/crates/*/src/*.sql",
     "retriever-rs/crates/*/tests/*.rs", "retriever-rs/crates/*/examples/*.rs",

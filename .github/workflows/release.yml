@@ -85,12 +85,14 @@ jobs:
               for key in ["TMP", "TEMP", "TMPDIR"]:
                   out.write(f"{key}={tmp}\n")
       - run: cargo test --locked --release --manifest-path retriever-rs/Cargo.toml --workspace -j 2 -- --test-threads=2
+      - run: dotnet run --project native/retriever-windows-tests -c Release -- artifacts/folder-upgrade-tests
       - name: Build preview installer
         shell: pwsh
         run: |
           $inno = "${env:ProgramFiles(x86)}/Inno Setup 6/ISCC.exe"
           if (!(Test-Path -LiteralPath $inno)) { throw 'Inno Setup 6 is required on the release runner' }
           python release/build.py windows-x64 --output dist --media artifacts/media --inno $inno
+      - run: python release/smoke.py --engine retriever-rs/target/release/retriever.exe --output artifacts/release-lifecycle
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: release-windows
@@ -125,6 +127,7 @@ jobs:
       - run: cargo test --locked --release --manifest-path retriever-rs/Cargo.toml --workspace -j 2 -- --test-threads=2
       - run: python release/media.py macos-arm64 artifacts/media
       - run: python release/build.py macos-arm64 --output dist --media artifacts/media
+      - run: python release/smoke.py --engine retriever-rs/target/release/retriever --output artifacts/release-lifecycle
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
         with:
           name: release-macos

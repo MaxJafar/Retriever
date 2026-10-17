@@ -1,6 +1,8 @@
+#if !RETRIEVER_INTEGRATION_TESTS
 using Microsoft.Win32;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml;
+#endif
 using System.Text.Json;
 
 namespace Retriever.Native;
@@ -9,11 +11,13 @@ interface IFolderRegistry {
     string? Read(string path,string name);
     void Write(string path,string name,string? value);
 }
+#if !RETRIEVER_INTEGRATION_TESTS
 sealed class UserFolderRegistry:IFolderRegistry {
     const string Prefix=@"Software\Classes\";
     public string? Read(string path,string name){using var key=Registry.CurrentUser.OpenSubKey(Prefix+path);var value=key?.GetValue(name,null,RegistryValueOptions.DoNotExpandEnvironmentNames);if(value!=null&&(value is not string||key!.GetValueKind(name)!=RegistryValueKind.String))throw new InvalidOperationException("An unsupported folder association already exists.");return value as string;}
     public void Write(string path,string name,string? value){if(value==null){using var existing=Registry.CurrentUser.OpenSubKey(Prefix+path,true);existing?.DeleteValue(name,false);}else{using var key=Registry.CurrentUser.CreateSubKey(Prefix+path);key.SetValue(name,value,RegistryValueKind.String);}}
 }
+#endif
 sealed class FolderIntegration {
     public record Change(string Path,string Name,string? Before,string After);
     public record Journal(string Executable,List<Change> Changes);
@@ -49,7 +53,50 @@ sealed class FolderIntegration {
         }
         File.Delete(journal);
     }
+    // Called by the per-user installer after the new executable is in place.
+    // Only our recorded verb is retargeted; newer default choices stay intact.
+    public bool UpgradeOwned(){
+        if(!File.Exists(journal))return false;
+        if(executable.Contains('"')||!File.Exists(executable))throw new InvalidOperationException("The replacement app is missing.");
+        if(new FileInfo(journal).Length>32*1024)throw new InvalidOperationException("Folder integration backup is invalid.");
+        var saved=JsonSerializer.Deserialize<Journal>(File.ReadAllText(journal))??throw new InvalidOperationException("Missing folder integration backup.");
+        if(string.Equals(saved.Executable,executable,StringComparison.OrdinalIgnoreCase))return false;
+        if(!Path.IsPathFullyQualified(saved.Executable)||saved.Executable.Contains('"'))throw new InvalidOperationException("Invalid previous folder application.");
+        var oldCommand=$"\"{saved.Executable}\" --open-folder \"%1\\.\"";
+        var expected=new Dictionary<(string,string),string>();
+        foreach(var type in new[]{"Directory","Drive"}){
+            var shell=type+@"\shell";var verb=shell+"\\"+Verb;
+            expected[(verb,"")]="Open in Retriever";expected[(verb,"Icon")]=saved.Executable;
+            expected[(verb+@"\command","")]=oldCommand;expected[(shell,"")]=Verb;
+        }
+        if(saved.Changes.Count!=8||saved.Changes.Select(c=>(c.Path,c.Name)).Distinct().Count()!=8||saved.Changes.Any(c=>!expected.TryGetValue((c.Path,c.Name),out var value)||c.After!=value))throw new InvalidOperationException("Invalid folder integration backup.");
+        var replacement=saved.Changes.Select(c=>c with{After=c.After==saved.Executable?executable:c.After==oldCommand?Command:c.After}).ToList();
+        var writes=new List<(Change Before,Change After)>();
+        foreach(var type in new[]{"Directory","Drive"}){
+            var command=registry.Read(type+@"\shell\"+Verb+@"\command","");
+            // Accept our new command too, to recover an interrupted handoff.
+            if(command!=oldCommand&&command!=Command)continue;
+            for(var i=0;i<saved.Changes.Count;i++){
+                var before=saved.Changes[i];var after=replacement[i];
+                if(before.Path.StartsWith(type+"\\",StringComparison.Ordinal)&&before.After!=after.After&&registry.Read(before.Path,before.Name)==before.After)writes.Add((before,after));
+            }
+        }
+        var temporary=journal+"."+Guid.NewGuid().ToString("N")+".tmp";
+        var applied=new List<(Change Before,Change After)>();
+        try{
+            File.WriteAllText(temporary,JsonSerializer.Serialize(new Journal(executable,replacement)));
+            foreach(var change in writes){
+                if(registry.Read(change.Before.Path,change.Before.Name)!=change.Before.After)throw new InvalidOperationException("Folder integration changed during the update. Retry after closing settings.");
+                applied.Add(change);registry.Write(change.After.Path,change.After.Name,change.After.After);
+            }
+            File.Move(temporary,journal,true);return true;
+        }catch{
+            foreach(var change in applied.AsEnumerable().Reverse())if(registry.Read(change.After.Path,change.After.Name)==change.After.After)registry.Write(change.Before.Path,change.Before.Name,change.Before.After);
+            throw;
+        }finally{if(File.Exists(temporary))File.Delete(temporary);}
+    }
 }
+#if !RETRIEVER_INTEGRATION_TESTS
 public sealed partial class MainWindow {
     Task FolderIntegrationPopover(){
         var integration=new FolderIntegration(new UserFolderRegistry(),Environment.ProcessPath!,api.StatePath);var body=new StackPanel{Spacing=12};
@@ -67,3 +114,4 @@ public sealed partial class MainWindow {
         Popover("Folder integration",body,width:340);return Task.CompletedTask;
     }
 }
+#endif

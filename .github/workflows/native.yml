@@ -51,6 +51,10 @@ jobs:
           engine = pathlib.Path("retriever-rs/target/release/retriever" + (".exe" if os.name == "nt" else ""))
           subprocess.run(["python", "release/smoke.py", "--engine", str(engine), "--output", "artifacts/lifecycle-smoke"], check=True)
       - if: runner.os == 'Windows'
+        name: Check folder integration upgrade with in-memory registry
+        shell: pwsh
+        run: dotnet run --project native/retriever-windows-tests -c Release -- artifacts/folder-upgrade-tests
+      - if: runner.os == 'Windows'
         shell: pwsh
         run: ./native/retriever-windows/build.ps1 -OutputDirectory artifacts/native-check
       - if: runner.os == 'macOS'

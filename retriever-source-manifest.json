@@ -23,18 +23,18 @@
     },
     {
       "path": ".github/workflows/native.yml",
-      "bytes": 2579,
-      "sha256": "14959302c4218804d61999c7b52d06240081e4da8c23b0c163e81113f9939710"
+      "bytes": 2815,
+      "sha256": "ab2dc9822b5ad3ae1de396ff13638254a1019c21391c84de343a9cc75720c76d"
     },
     {
       "path": ".github/workflows/release.yml",
-      "bytes": 6327,
-      "sha256": "4810a3daf335717fbec84d3745db9fd3abe4e4009b7ec6c58907ea03a956fb9f"
+      "bytes": 6683,
+      "sha256": "920d918a1109b36e161b887a477aace9995ed35230c6c49c975db684fb02bc64"
     },
     {
       "path": ".gitignore",
-      "bytes": 4112,
-      "sha256": "1ced4c5e1edc455ee217cd212732fe5ed5fa1b968660ee90ebf03d3a9e41b75e"
+      "bytes": 4261,
+      "sha256": "0510af44f4e872311a49c75589a7e9aaa98eeda9fdbf87a3b9a7c81106ba98e8"
     },
     {
       "path": "CHANGELOG.md",
@@ -63,8 +63,8 @@
     },
     {
       "path": "docs/updates.md",
-      "bytes": 3349,
-      "sha256": "9219ffbe1c096988141877dd7a368007d7ebc59892a4421aeee23e2fa12acd73"
+      "bytes": 3535,
+      "sha256": "6f6fd1d36b31046d2f303412e79ccf1dbb1cdaa77c68e4ab740d0c2fbba49bca"
     },
     {
       "path": "LICENSE",
@@ -208,8 +208,8 @@
     },
     {
       "path": "native/retriever-windows/App.xaml.cs",
-      "bytes": 1066,
-      "sha256": "c62d7f705a080425a1bae63a46d01db54bf3565526c72b06a9308f3aaa195b5b"
+      "bytes": 1303,
+      "sha256": "53ae4fec1948f2aebab4af5a7b2e5f4a04f879597fe04621a33dc63fcf0f39e4"
     },
     {
       "path": "native/retriever-windows/BatchFiles.cs",
@@ -288,8 +288,8 @@
     },
     {
       "path": "native/retriever-windows/FolderIntegration.cs",
-      "bytes": 6375,
-      "sha256": "abeb03f35e681690289ccaab0c9d7be65079145c3cf00f61fc55e6bc83815794"
+      "bytes": 9947,
+      "sha256": "bc56a388496e92d435b4600056abb18555d277913a597a7319300f91ffe1b5ef"
     },
     {
       "path": "native/retriever-windows/FolderTree.cs",
@@ -303,8 +303,8 @@
     },
     {
       "path": "native/retriever-windows/installer.iss",
-      "bytes": 1899,
-      "sha256": "e4e7191054d4c1762fc6977dd6f9a5b719b8aa01ea09a044b64e27d31091d358"
+      "bytes": 2377,
+      "sha256": "bc10c72599a76e5d6a996017dd3c6ff5b07141d7f664b8db55f02de252562df0"
     },
     {
       "path": "native/retriever-windows/MainWindow.cs",
@@ -387,6 +387,16 @@
       "sha256": "e34fdf050301b108013e49f9672a043154485a695f8d8cec4249f3e968384a7c"
     },
     {
+      "path": "native/retriever-windows-tests/IntegrationTests.csproj",
+      "bytes": 412,
+      "sha256": "f9ae568715eb5b190fa8bc281a417fd9493c5282f30aa5a7bbbd0cb944ed2ef0"
+    },
+    {
+      "path": "native/retriever-windows-tests/Program.cs",
+      "bytes": 4451,
+      "sha256": "56b0b8b8bb4882b9e3c880f017594719fce2d763401b3492e0e9f24844438d60"
+    },
+    {
       "path": "README.md",
       "bytes": 2492,
       "sha256": "303d41edaae5bf8e8cba772b457ca37e985e22be4fbbb0881ef7f3785513fe80"
@@ -398,8 +408,8 @@
     },
     {
       "path": "release/export.py",
-      "bytes": 6156,
-      "sha256": "29b37078842a2494a0dd1c63bec5fa5492d723e3b10b9d04a627a349d452d940"
+      "bytes": 6242,
+      "sha256": "8af25f3e4e580a0bcc4b16317f4da2b2a40cae354557ccc1a679c71f8e020fd9"
     },
     {
       "path": "release/macos-entitlements.plist",
@@ -408,8 +418,8 @@
     },
     {
       "path": "release/media.py",
-      "bytes": 5460,
-      "sha256": "7954fb89c4b7ce6dac8848974ae09eb028571c08c19e3f8ea8fef9e163e9d886"
+      "bytes": 5640,
+      "sha256": "bcba50d03c20849cff63a1d18e6abb536d18def361bdf607203349e7efe97053"
     },
     {
       "path": "release/notices.py",

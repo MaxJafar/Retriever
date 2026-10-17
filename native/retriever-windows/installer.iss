@@ -39,6 +39,14 @@ Name: "{userprograms}\Retriever Quick Search"; Filename: "{app}\Retriever.exe"; 
 Filename: "{app}\Retriever.exe"; Description: "Open Retriever"; Flags: nowait postinstall skipifsilent
 ; Versioned app folders retain rollback files. State and models live outside them.
 [Code]
+procedure CurStepChanged(CurStep: TSetupStep);
+var Code: Integer;
+begin
+  if CurStep = ssPostInstall then
+    if not Exec(ExpandConstant('{app}\Retriever.exe'), '--upgrade-folder-integration', '', SW_HIDE, ewWaitUntilTerminated, Code) or (Code <> 0) then
+      MsgBox('Retriever is installed. Folder integration could not be updated; the previous app and its restore record are retained. Run this installer again before removing the previous app.', mbInformation, MB_OK);
+end;
+
 function InitializeUninstall(): Boolean;
 var Code: Integer;
 begin

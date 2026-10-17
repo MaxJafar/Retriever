@@ -6,6 +6,7 @@ public partial class App:Application {
     public App(){InitializeComponent();}
     protected override async void OnLaunched(LaunchActivatedEventArgs args){
         var launch=Environment.GetCommandLineArgs().Skip(1).ToArray();
+        if(launch.Contains("--upgrade-folder-integration")){try{using var api=new Api();new FolderIntegration(new UserFolderRegistry(),Environment.ProcessPath!,api.StatePath).UpgradeOwned();}catch{Environment.ExitCode=1;}Exit();return;}
         if(launch.Contains("--restore-folder-default")){try{using var api=new Api();new FolderIntegration(new UserFolderRegistry(),Environment.ProcessPath!,api.StatePath).Restore();}catch{Environment.ExitCode=1;}Exit();return;}
         activation=new FolderActivation();if(!activation.IsOwner){try{await activation.Forward(launch);}catch{Environment.ExitCode=1;}Exit();return;}
         window=new MainWindow();window.Closed+=(_,_)=>activation.Dispose();window.Activate();
