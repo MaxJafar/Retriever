@@ -19,7 +19,7 @@ hex = "0.4"
 image = { version = "0.25", default-features = false, features = ["png", "jpeg", "gif", "webp", "bmp", "tiff"] }
 memmap2 = "0.9"
 parking_lot = "0.12"
-quick-xml = "0.38"
+quick-xml = "0.42"
 regex = "1"
 reqwest = { version = "0.12", default-features = false, features = ["json", "rustls-tls", "stream"] }
 rusqlite = { version = "0.37", features = ["bundled", "backup"] }
