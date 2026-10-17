@@ -183,8 +183,8 @@
     },
     {
       "path": "native/retriever-macos/Updates.swift",
-      "bytes": 12136,
-      "sha256": "388accf0ba199aaba678ccfc5254e85817efc6e7dbd73a66ff26539612c0ef8d"
+      "bytes": 12118,
+      "sha256": "eca9a557f5524740f65e33b5cbafb45926463d1ab4df2942d3e23ed4ed92642b"
     },
     {
       "path": "native/retriever-macos/WorkspacePopovers.swift",

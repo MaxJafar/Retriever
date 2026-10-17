@@ -48,7 +48,7 @@ import Foundation
         var result:[String:Any]?
         for try await line in output.fileHandleForReading.bytes.lines {
             guard let value=try JSONSerialization.jsonObject(with:Data(line.utf8)) as? [String:Any] else{continue}
-            if value["event"] as? String == "progress",let received=value["received"] as? Double,let total=value["total"] as? Double,total>0 {message="Downloading update В· \(Int(received*100/total))%"}else{result=value}
+            if value["event"] as? String == "progress",let received=value["received"] as? Double,let total=value["total"] as? Double,total>0 {message="Downloading update - \(Int(received*100/total))%"}else{result=value}
         }
         while task.isRunning{try await Task.sleep(for:.milliseconds(50))}
         let data=await errorData.value
@@ -56,13 +56,13 @@ import Foundation
         guard let result else{throw NSError(domain:"RetrieverUpdater",code:3,userInfo:[NSLocalizedDescriptionKey:"The update helper returned no result."])};return result
     }
     func check(manual:Bool) async {
-        guard !busy,manual || automatic else{return};busy=true;message="Checking GitHub for updatesвЂ¦";defer{busy=false}
-        do{var args=["check","--current",current,"--platform","macos-arm64","--cache",folder.appendingPathComponent("releases.json").path];if preview{args.append("--preview")};if manual{args.append("--force")};let result=try await run(args);available=result["update"] as? [String:Any];message=available.map{"Retriever \($0["version"] ?? "") is available."} ?? (result["message"] as? String ?? "YouвЂ™re up to date.");if manual{skipped="";laterUntil=0;save()}}
+        guard !busy,manual || automatic else{return};busy=true;message="Checking GitHub for updates...";defer{busy=false}
+        do{var args=["check","--current",current,"--platform","macos-arm64","--cache",folder.appendingPathComponent("releases.json").path];if preview{args.append("--preview")};if manual{args.append("--force")};let result=try await run(args);available=result["update"] as? [String:Any];message=available.map{"Retriever \($0["version"] ?? "") is available."} ?? (result["message"] as? String ?? "You're up to date.");if manual{skipped="";laterUntil=0;save()}}
         catch{message=error.localizedDescription}
     }
     func download() async {
         guard !busy,let id=available?["release_id"] as? NSNumber else{return};busy=true;downloading=true;defer{busy=false;downloading=false}
-        do{let target=folder.appendingPathComponent("downloads/"+UUID().uuidString,isDirectory:true);var args=["download","--current",current,"--platform","macos-arm64","--release-id",id.stringValue,"--output",target.path];if preview{args.append("--preview")};let result=try await run(args);guard let download=result["download"] as? [String:Any] else{throw CocoaError(.fileReadCorruptFile)};downloadVersion=download["version"] as? String ?? "";receipt=target.appendingPathComponent("download.json").path;save();message="Update downloaded and verified. Open it when youвЂ™re ready."}catch{message=error.localizedDescription}
+        do{let target=folder.appendingPathComponent("downloads/"+UUID().uuidString,isDirectory:true);var args=["download","--current",current,"--platform","macos-arm64","--release-id",id.stringValue,"--output",target.path];if preview{args.append("--preview")};let result=try await run(args);guard let download=result["download"] as? [String:Any] else{throw CocoaError(.fileReadCorruptFile)};downloadVersion=download["version"] as? String ?? "";receipt=target.appendingPathComponent("download.json").path;save();message="Update downloaded and verified. Open it when you're ready."}catch{message=error.localizedDescription}
     }
     func installer() async throws -> URL {guard !busy,downloaded,let receipt else{throw CocoaError(.fileNoSuchFile)};let result=try await run(["verify","--receipt",receipt]);guard let path=result["path"] as? String else{throw CocoaError(.fileReadCorruptFile)};return URL(fileURLWithPath:path)}
 }
