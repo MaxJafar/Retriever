@@ -1,0 +1,5 @@
+{
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "source": "Official Rust 1.97.1 rustup distribution: share/doc/rust/COPYRIGHT-library.html and licenses",
+  "purpose": "Standard-library attribution fallback for minimal/Homebrew toolchains"
+}

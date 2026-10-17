@@ -1,0 +1,18 @@
+Retriever native retrieval bundle
+
+EmbeddingGemma 2: Google DeepMind, Apache License 2.0.
+Model card: https://huggingface.co/google/embeddinggemma-2
+Q8_0 conversion: https://huggingface.co/ggml-org/embeddinggemma-2-GGUF
+The local GGUF is copied without modification. Only the text encoder is used.
+
+Laya multilingual: Convai Innovations, Apache License 2.0.
+Model card: https://huggingface.co/convaiinnovations/laya-multilingual
+Reference preprocessing: https://github.com/NandhaKishorM/laya
+Local change: exported to ONNX with dynamic input lengths; FP32 CPU inference.
+The exact source revisions and file hashes are recorded in bundle.json.
+
+ONNX Runtime: Microsoft, MIT License. See ONNXRUNTIME-LICENSE and
+ONNXRUNTIME-ThirdPartyNotices.txt beside this notice.
+
+llama.cpp is linked into the engine. Its MIT license and pinned source
+provenance accompany the application notices.

@@ -1,0 +1,17 @@
+<Application x:Class="Retriever.Native.App" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+ <Application.Resources><ResourceDictionary><ResourceDictionary.MergedDictionaries><XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/></ResourceDictionary.MergedDictionaries>
+ <Color x:Key="SystemAccentColor">#E5BD4C</Color>
+ <Color x:Key="SystemAccentColorLight1">#E9C768</Color>
+ <Color x:Key="SystemAccentColorLight2">#EDCF80</Color>
+ <Color x:Key="SystemAccentColorLight3">#F4DFA8</Color>
+ <Color x:Key="SystemAccentColorDark1">#CBA332</Color>
+ <Color x:Key="SystemAccentColorDark2">#AA8522</Color>
+ <Color x:Key="SystemAccentColorDark3">#806417</Color>
+ <SolidColorBrush x:Key="SystemControlHighlightAccentBrush" Color="#E5BD4C"/>
+ <SolidColorBrush x:Key="AccentFillColorDefaultBrush" Color="#E5BD4C"/>
+ <SolidColorBrush x:Key="AccentFillColorSecondaryBrush" Color="#D8B044"/>
+ <SolidColorBrush x:Key="AccentFillColorTertiaryBrush" Color="#C9A138"/>
+ <SolidColorBrush x:Key="AccentTextFillColorPrimaryBrush" Color="#E5BD4C"/>
+ <SolidColorBrush x:Key="TextOnAccentFillColorPrimaryBrush" Color="#1F1F1F"/>
+ </ResourceDictionary></Application.Resources>
+</Application>

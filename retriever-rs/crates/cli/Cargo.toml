@@ -1,0 +1,11 @@
+[package]
+name = "retriever"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+[dependencies]
+anyhow.workspace = true
+clap.workspace = true
+tokio.workspace = true
+serde_json.workspace = true
+retriever-engine.workspace = true

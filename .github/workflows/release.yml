@@ -1,0 +1,153 @@
+name: Draft native release
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  source:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - name: Validate release identity
+        env:
+          RELEASE_TAG: ${{ startsWith(github.ref, 'refs/tags/') && github.ref_name || '' }}
+          RELEASE_REPOSITORY: ${{ github.repository }}
+        run: |
+          if [ -n "$RELEASE_TAG" ]; then
+            python release/validate.py --tag "$RELEASE_TAG" --repository "$RELEASE_REPOSITORY"
+          else
+            python release/validate.py --repository "$RELEASE_REPOSITORY"
+          fi
+      - run: python -m unittest discover -s release -p test_*.py
+      - run: python release/export.py dist/Retriever-source.tar.gz
+      - run: cd dist && sha256sum Retriever-source.tar.gz > Retriever-source.tar.gz.sha256
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: release-source
+          path: dist/*
+          retention-days: 7
+  windows-media:
+    needs: source
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: sudo apt-get update && sudo apt-get install --no-install-recommends -y gcc-mingw-w64-x86-64 make
+      - run: python release/media.py windows-x64 artifacts/media
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: windows-media
+          path: |
+            artifacts/media/*.exe
+            artifacts/media/*.dll
+            artifacts/media/media-runtime.json
+            artifacts/media/notices/
+          retention-days: 3
+  windows:
+    needs: windows-media
+    runs-on: windows-2022
+    timeout-minutes: 60
+    env:
+      CMAKE_BUILD_PARALLEL_LEVEL: 2
+      RETRIEVER_AGENT_STATE: ${{ github.workspace }}/artifacts/test-agent
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - uses: actions/setup-dotnet@a98b56852c35b8e3190ac28c8c2271da59106c68 # v6
+        with:
+          dotnet-version: '10.0.x'
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          name: windows-media
+          path: artifacts/media
+      - run: rustup toolchain install 1.97.1 --profile minimal
+      - run: rustup override set 1.97.1
+      - name: Use isolated fixture temporary folders
+        shell: python
+        run: |
+          import os, pathlib
+          tmp = pathlib.Path("artifacts/test-tmp").resolve()
+          tmp.mkdir(parents=True, exist_ok=True)
+          with open(os.environ["GITHUB_ENV"], "a") as out:
+              for key in ["TMP", "TEMP", "TMPDIR"]:
+                  out.write(f"{key}={tmp}\n")
+      - run: cargo test --locked --release --manifest-path retriever-rs/Cargo.toml --workspace -j 2 -- --test-threads=2
+      - name: Build preview installer
+        shell: pwsh
+        run: |
+          $inno = "${env:ProgramFiles(x86)}/Inno Setup 6/ISCC.exe"
+          if (!(Test-Path -LiteralPath $inno)) { throw 'Inno Setup 6 is required on the release runner' }
+          python release/build.py windows-x64 --output dist --media artifacts/media --inno $inno
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: release-windows
+          path: |
+            dist/*.exe
+            dist/*.sha256
+          retention-days: 7
+  macos:
+    needs: source
+    runs-on: macos-15
+    timeout-minutes: 90
+    env:
+      CMAKE_BUILD_PARALLEL_LEVEL: 2
+      MACOSX_DEPLOYMENT_TARGET: '14.0'
+      RETRIEVER_AGENT_STATE: ${{ github.workspace }}/artifacts/test-agent
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7
+        with:
+          python-version: '3.13'
+      - run: rustup toolchain install 1.97.1 --profile minimal
+      - run: rustup override set 1.97.1
+      - name: Use isolated fixture temporary folders
+        shell: python
+        run: |
+          import os, pathlib
+          tmp = pathlib.Path("artifacts/test-tmp").resolve()
+          tmp.mkdir(parents=True, exist_ok=True)
+          with open(os.environ["GITHUB_ENV"], "a") as out:
+              for key in ["TMP", "TEMP", "TMPDIR"]:
+                  out.write(f"{key}={tmp}\n")
+      - run: cargo test --locked --release --manifest-path retriever-rs/Cargo.toml --workspace -j 2 -- --test-threads=2
+      - run: python release/media.py macos-arm64 artifacts/media
+      - run: python release/build.py macos-arm64 --output dist --media artifacts/media
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7
+        with:
+          name: release-macos
+          path: |
+            dist/*.dmg
+            dist/*.sha256
+          retention-days: 7
+  draft:
+    if: startsWith(github.ref, 'refs/tags/')
+    needs: [source, windows, macos]
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8
+        with:
+          pattern: release-*
+          merge-multiple: true
+          path: dist
+      - name: Create draft only
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python -c "import pathlib,subprocess,os; tag=os.environ['RELEASE_TAG']; assets=sorted(str(p) for p in pathlib.Path('dist').iterdir() if p.is_file()); subprocess.run(['gh','release','create',tag,'--verify-tag','--draft','--prerelease','--title','Retriever '+tag,'--notes-file','release/PREVIEW-NOTICE.txt',*assets],check=True)"

@@ -1,0 +1,5 @@
+llama.cpp https://github.com/ggml-org/llama.cpp
+Revision: 4d756bc72bf00a4aacf410ae15a2d315f3db400d
+MIT license: LICENSE
+Retriever patch: skip logits allocation in a noncausal embedding-only context.
+Source subset: src, include, ggml, cmake, vendor and root CMakeLists.txt.

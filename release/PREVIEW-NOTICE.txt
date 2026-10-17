@@ -1,0 +1,16 @@
+Retriever preview
+
+This is an early public release for Windows x64 and Apple Silicon macOS 14+.
+The hosted preview Windows installer is unsigned. The Mac app is ad-hoc signed,
+not Developer ID signed or notarized. Operating systems may block these previews.
+Keep independent backups of important files before any file-management operation.
+
+Updates preserve the existing state directory, library, metadata, models and caches.
+The application and optional AI model bundles are installed separately. Filename
+and indexed-text search work without model weights; semantic ranking needs the
+native model bundle described in the build documentation.
+
+Disk Capacity reads real selected folders. Disk Health is fixture-only and does
+not collect physical disk health or SMART telemetry.
+
+Source: https://github.com/MaxJafar/Retriever

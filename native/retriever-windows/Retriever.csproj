@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>Retriever</AssemblyName><Product>Retriever</Product><Version>0.13.0-alpha.21-native</Version>
+    <OutputType>WinExe</OutputType><TargetFramework>net10.0-windows10.0.19041.0</TargetFramework>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion><RootNamespace>Retriever.Native</RootNamespace>
+    <ApplicationIcon>Retriever.ico</ApplicationIcon><ApplicationManifest>app.manifest</ApplicationManifest>
+    <Platforms>x64</Platforms><PlatformTarget>x64</PlatformTarget><RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <UseWinUI>true</UseWinUI><EnableMsixTooling>true</EnableMsixTooling><WindowsPackageType>None</WindowsPackageType>
+    <WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained><SelfContained>true</SelfContained>
+    <Nullable>enable</Nullable><ImplicitUsings>enable</ImplicitUsings>
+    <MsixTaskAssemblyLocation>$(NuGetPackageRoot)microsoft.windows.sdk.buildtools.msix\1.7.20250829.1\tools\net6.0\</MsixTaskAssemblyLocation>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools.MSIX" Version="1.7.20250829.1"/>
+    <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.240923002"/>
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742"/>
+    <Content Include="Retriever.png"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="../../release/repository.json" Link="repository.json"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+    <Content Include="Retriever.ico"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
+  </ItemGroup>
+</Project>

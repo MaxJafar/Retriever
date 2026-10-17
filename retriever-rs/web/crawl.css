@@ -1,0 +1,5 @@
+.crawlDialog{width:min(860px,calc(100vw - 32px));max-height:88vh;padding:24px}
+.crawlFolders{display:grid;gap:16px;margin:20px 0}.crawlFolder{border:1px solid var(--border,#7774);border-radius:10px;padding:18px;background:var(--panel,transparent)}
+.crawlFolder h3{font-size:14px;line-height:1.5;margin:0;overflow-wrap:anywhere}.crawlFolder .hint{font-size:12px;line-height:1.6;overflow-wrap:anywhere}
+.crawlChoices{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin:14px 0}.crawlChoices label{display:flex;flex-direction:column;gap:7px;font-size:12px}.crawlChoices [hidden]{display:none}.crawlChoices input,.crawlChoices select{width:100%;min-height:36px}.crawlFolder button{transition:background-color .15s ease,box-shadow .15s ease}.crawlFolder button:focus-visible{outline:2px solid #c69a22;outline-offset:3px}.crawlDialog .folderActions{display:flex;flex-wrap:wrap;gap:8px}
+@media(prefers-reduced-motion:reduce){.crawlFolder button{transition:none}}@media(max-width:540px){.crawlDialog{padding:16px}.crawlFolder{padding:12px}.crawlChoices{grid-template-columns:1fr}}

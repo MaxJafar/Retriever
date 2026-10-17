@@ -1,0 +1,247 @@
+{
+  "fixture_only": true,
+  "scan": {
+    "id": "synthetic-capacity",
+    "root": "fixture://Studio",
+    "state": "complete",
+    "error": "",
+    "summary": {
+      "volume": {
+        "total": 1099511627776,
+        "available": 335007449088
+      },
+      "elapsed_ms": 18240,
+      "errors": 0,
+      "links_skipped": 0,
+      "mounts_skipped": 0,
+      "private_state_skipped": 0,
+      "allocation_unknown": 0
+    }
+  },
+  "current": {
+    "id": 1,
+    "parent": 0,
+    "path": "Studio \u00b7 synthetic example",
+    "logical": 676457349120,
+    "allocated": 676457349120,
+    "files": 48216,
+    "allocation_unknown": 0
+  },
+  "entries": [
+    {
+      "id": 2,
+      "parent": 1,
+      "name": "Projects",
+      "path": "fixture://Studio/Projects",
+      "kind": "folder",
+      "logical": 225485783040,
+      "allocated": 225485783040,
+      "files": 2000,
+      "allocation_unknown": 0,
+      "delta": -2147483648,
+      "warning": ""
+    },
+    {
+      "id": 3,
+      "parent": 1,
+      "name": "Design library",
+      "path": "fixture://Studio/Design library",
+      "kind": "folder",
+      "logical": 158913789952,
+      "allocated": 158913789952,
+      "files": 3000,
+      "allocation_unknown": 0,
+      "delta": -1073741824,
+      "warning": ""
+    },
+    {
+      "id": 4,
+      "parent": 1,
+      "name": "Video archive",
+      "path": "fixture://Studio/Video archive",
+      "kind": "folder",
+      "logical": 130996502528,
+      "allocated": 130996502528,
+      "files": 4000,
+      "allocation_unknown": 0,
+      "delta": 0,
+      "warning": ""
+    },
+    {
+      "id": 5,
+      "parent": 1,
+      "name": "Research",
+      "path": "fixture://Studio/Research",
+      "kind": "folder",
+      "logical": 81604378624,
+      "allocated": 81604378624,
+      "files": 5000,
+      "allocation_unknown": 0,
+      "delta": 1073741824,
+      "warning": ""
+    },
+    {
+      "id": 6,
+      "parent": 1,
+      "name": "Documents",
+      "path": "fixture://Studio/Documents",
+      "kind": "folder",
+      "logical": 45097156608,
+      "allocated": 45097156608,
+      "files": 6000,
+      "allocation_unknown": 0,
+      "delta": 2147483648,
+      "warning": ""
+    },
+    {
+      "id": 7,
+      "parent": 1,
+      "name": "Team exports",
+      "path": "fixture://Studio/Team exports",
+      "kind": "folder",
+      "logical": 34359738368,
+      "allocated": 34359738368,
+      "files": 7000,
+      "allocation_unknown": 0,
+      "delta": 3221225472,
+      "warning": ""
+    }
+  ],
+  "treemap": [
+    {
+      "id": 2,
+      "parent": 1,
+      "name": "Projects",
+      "path": "fixture://Studio/Projects",
+      "kind": "folder",
+      "logical": 225485783040,
+      "allocated": 225485783040,
+      "files": 2000,
+      "allocation_unknown": 0,
+      "delta": -2147483648,
+      "warning": "",
+      "rect": {
+        "x": 0,
+        "y": 0,
+        "width": 0.3333333333333333,
+        "height": 1
+      }
+    },
+    {
+      "id": 3,
+      "parent": 1,
+      "name": "Design library",
+      "path": "fixture://Studio/Design library",
+      "kind": "folder",
+      "logical": 158913789952,
+      "allocated": 158913789952,
+      "files": 3000,
+      "allocation_unknown": 0,
+      "delta": -1073741824,
+      "warning": "",
+      "rect": {
+        "x": 0.3333333333333333,
+        "y": 0,
+        "width": 0.23492063492063492,
+        "height": 1
+      }
+    },
+    {
+      "id": 4,
+      "parent": 1,
+      "name": "Video archive",
+      "path": "fixture://Studio/Video archive",
+      "kind": "folder",
+      "logical": 130996502528,
+      "allocated": 130996502528,
+      "files": 4000,
+      "allocation_unknown": 0,
+      "delta": 0,
+      "warning": "",
+      "rect": {
+        "x": 0.5682539682539682,
+        "y": 0,
+        "width": 0.19365079365079366,
+        "height": 1
+      }
+    },
+    {
+      "id": 5,
+      "parent": 1,
+      "name": "Research",
+      "path": "fixture://Studio/Research",
+      "kind": "folder",
+      "logical": 81604378624,
+      "allocated": 81604378624,
+      "files": 5000,
+      "allocation_unknown": 0,
+      "delta": 1073741824,
+      "warning": "",
+      "rect": {
+        "x": 0.7619047619047619,
+        "y": 0,
+        "width": 0.12063492063492064,
+        "height": 1
+      }
+    },
+    {
+      "id": 6,
+      "parent": 1,
+      "name": "Documents",
+      "path": "fixture://Studio/Documents",
+      "kind": "folder",
+      "logical": 45097156608,
+      "allocated": 45097156608,
+      "files": 6000,
+      "allocation_unknown": 0,
+      "delta": 2147483648,
+      "warning": "",
+      "rect": {
+        "x": 0.8825396825396825,
+        "y": 0,
+        "width": 0.06666666666666667,
+        "height": 1
+      }
+    },
+    {
+      "id": 7,
+      "parent": 1,
+      "name": "Team exports",
+      "path": "fixture://Studio/Team exports",
+      "kind": "folder",
+      "logical": 34359738368,
+      "allocated": 34359738368,
+      "files": 7000,
+      "allocation_unknown": 0,
+      "delta": 3221225472,
+      "warning": "",
+      "rect": {
+        "x": 0.9492063492063492,
+        "y": 0,
+        "width": 0.050793650793650794,
+        "height": 1
+      }
+    }
+  ],
+  "types": [
+    {
+      "extension": "mp4",
+      "logical": 261993005056
+    },
+    {
+      "extension": "psd",
+      "logical": 158913789952
+    },
+    {
+      "extension": "pdf",
+      "logical": 126701535232
+    },
+    {
+      "extension": "other",
+      "logical": 128849018880
+    }
+  ],
+  "total": 6,
+  "next_offset": null,
+  "previous_scan": "synthetic-baseline"
+}

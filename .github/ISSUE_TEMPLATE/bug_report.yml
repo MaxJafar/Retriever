@@ -1,0 +1,27 @@
+name: Bug report
+description: Report a reproducible Retriever problem using synthetic data.
+body:
+  - type: markdown
+    attributes:
+      value: "Keep pairing tokens, SSH keys, personal paths, document excerpts and private device addresses out of this issue. Use synthetic files. Security issues belong in the repository's private reporting channel."
+  - type: input
+    id: version
+    attributes:
+      label: Retriever version
+      placeholder: "0.13.0-alpha.21-native"
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: "OS version, CPU architecture, desktop client version and optional native model bundle version."
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: "Include a small synthetic example, expected behavior and what happened. Redact private details from errors or screenshots."
+    validations:
+      required: true

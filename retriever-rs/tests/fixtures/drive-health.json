@@ -1,0 +1,811 @@
+{
+  "fixture_only": true,
+  "probe_available": false,
+  "disabled_reason": "Synthetic preview only. Live collection is blocked.",
+  "error": "",
+  "refreshing": false,
+  "last_attempt": 0,
+  "host": "fixture",
+  "read_only": true,
+  "model_calls": 0,
+  "settings": {
+    "interval_minutes": 0,
+    "temperature_c": 70,
+    "remaining_life_percent": 10
+  },
+  "drives": [
+    {
+      "id": "1111111111111111111111111111111111111111111111111111111111111111",
+      "path": "fixture://drive-1",
+      "model": "Example NVMe SSD",
+      "serial": "SYNTHETIC-1",
+      "firmware": "DEMO.1",
+      "bus": "NVMe",
+      "capacity_bytes": 1000000000000,
+      "source": "Synthetic fixture report",
+      "coverage": "smart",
+      "smart_passed": true,
+      "temperature_c": 38,
+      "remaining_percent": 94,
+      "power_on_hours": "4200",
+      "power_cycles": "125",
+      "host_reads_bytes": "34000000000000",
+      "host_writes_bytes": "18000000000000",
+      "status": "Good",
+      "sampled_at": 1790856000.0,
+      "present": true,
+      "stale": true,
+      "fixture_only": true,
+      "attributes": [
+        {
+          "id": "01",
+          "name": "Critical warning",
+          "raw": "0",
+          "unit": "bit mask",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "02",
+          "name": "Composite temperature",
+          "raw": "38",
+          "unit": "°C",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "03",
+          "name": "Available spare",
+          "raw": "100",
+          "unit": "%",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "04",
+          "name": "Percentage used",
+          "raw": "6",
+          "unit": "%",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "05",
+          "name": "Data units read",
+          "raw": "66406250",
+          "unit": "512,000 bytes",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "06",
+          "name": "Data units written",
+          "raw": "35156250",
+          "unit": "512,000 bytes",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "07",
+          "name": "Power cycles",
+          "raw": "125",
+          "unit": "cycles",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "08",
+          "name": "Power on hours",
+          "raw": "4200",
+          "unit": "hours",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "09",
+          "name": "Unsafe shutdowns",
+          "raw": "2",
+          "unit": "events",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "0A",
+          "name": "Media and data integrity errors",
+          "raw": "0",
+          "unit": "errors",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        },
+        {
+          "id": "0B",
+          "name": "Large counter precision fixture",
+          "raw": "18446744073709551738",
+          "unit": "commands",
+          "current": null,
+          "worst": null,
+          "threshold": null
+        }
+      ],
+      "reasons": [
+        "Synthetic example. No health information from this computer was collected."
+      ],
+      "limitations": []
+    },
+    {
+      "id": "2222222222222222222222222222222222222222222222222222222222222222",
+      "path": "fixture://drive-2",
+      "model": "Example archive HDD",
+      "serial": "SYNTHETIC-2",
+      "firmware": "DEMO.1",
+      "bus": "SATA",
+      "capacity_bytes": 1000000000000,
+      "source": "Synthetic fixture report",
+      "coverage": "smart",
+      "smart_passed": false,
+      "temperature_c": 42,
+      "remaining_percent": null,
+      "power_on_hours": null,
+      "power_cycles": null,
+      "host_reads_bytes": null,
+      "host_writes_bytes": null,
+      "status": "Caution",
+      "sampled_at": 1790856000.0,
+      "present": true,
+      "stale": true,
+      "fixture_only": true,
+      "attributes": [
+        {
+          "id": "05",
+          "name": "Reallocated sectors",
+          "raw": "12",
+          "raw_hex": "00000000000C",
+          "unit": "",
+          "current": 99,
+          "worst": 98,
+          "threshold": 10
+        },
+        {
+          "id": "09",
+          "name": "Power on time (vendor units)",
+          "raw": "17250",
+          "raw_hex": "000000004362",
+          "unit": "",
+          "current": 95,
+          "worst": 95,
+          "threshold": null
+        },
+        {
+          "id": "C2",
+          "name": "Temperature",
+          "raw": "42",
+          "raw_hex": "00000000002A",
+          "unit": "",
+          "current": 100,
+          "worst": 95,
+          "threshold": 0
+        },
+        {
+          "id": "C5",
+          "name": "Current pending sectors",
+          "raw": "2",
+          "raw_hex": "000000000002",
+          "unit": "",
+          "current": 100,
+          "worst": 100,
+          "threshold": 0
+        },
+        {
+          "id": "E7",
+          "name": "Unknown vendor attribute",
+          "raw": "124",
+          "raw_hex": "00000000007C",
+          "unit": "",
+          "current": 98,
+          "worst": 90,
+          "threshold": null
+        }
+      ],
+      "reasons": [
+        "Synthetic example: reallocated and pending sectors are present."
+      ],
+      "limitations": [
+        "Vendor-specific hour and endurance units are unknown."
+      ]
+    },
+    {
+      "id": "3333333333333333333333333333333333333333333333333333333333333333",
+      "path": "fixture://drive-3",
+      "model": "Example unsupported USB bridge",
+      "serial": "SYNTHETIC-3",
+      "firmware": "DEMO.1",
+      "bus": "USB",
+      "capacity_bytes": 1000000000000,
+      "source": "Synthetic fixture report",
+      "coverage": "unavailable",
+      "smart_passed": null,
+      "temperature_c": null,
+      "remaining_percent": null,
+      "power_on_hours": null,
+      "power_cycles": null,
+      "host_reads_bytes": null,
+      "host_writes_bytes": null,
+      "status": "Unknown",
+      "sampled_at": 1790856000.0,
+      "present": true,
+      "stale": true,
+      "fixture_only": true,
+      "attributes": [],
+      "reasons": [
+        "Synthetic example. No health information from this computer was collected."
+      ],
+      "limitations": [
+        "Synthetic unsupported bridge: no SMART telemetry is available."
+      ]
+    },
+    {
+      "id": "4444444444444444444444444444444444444444444444444444444444444444",
+      "path": "fixture://drive-4",
+      "model": "Example disconnected SSD",
+      "serial": "SYNTHETIC-4",
+      "firmware": "DEMO.1",
+      "bus": "NVMe",
+      "capacity_bytes": 1000000000000,
+      "source": "Synthetic fixture report",
+      "coverage": "smart",
+      "smart_passed": true,
+      "temperature_c": null,
+      "remaining_percent": null,
+      "power_on_hours": null,
+      "power_cycles": null,
+      "host_reads_bytes": null,
+      "host_writes_bytes": null,
+      "status": "Good",
+      "sampled_at": 1790856000.0,
+      "present": false,
+      "stale": true,
+      "fixture_only": true,
+      "attributes": [],
+      "reasons": [
+        "Synthetic example. No health information from this computer was collected."
+      ],
+      "limitations": [
+        "Synthetic disconnected drive. Historical values do not indicate current health."
+      ]
+    }
+  ],
+  "details": {
+    "1111111111111111111111111111111111111111111111111111111111111111": {
+      "drive": {
+        "id": "1111111111111111111111111111111111111111111111111111111111111111",
+        "path": "fixture://drive-1",
+        "model": "Example NVMe SSD",
+        "serial": "SYNTHETIC-1",
+        "firmware": "DEMO.1",
+        "bus": "NVMe",
+        "capacity_bytes": 1000000000000,
+        "source": "Synthetic fixture report",
+        "coverage": "smart",
+        "smart_passed": true,
+        "temperature_c": 38,
+        "remaining_percent": 94,
+        "power_on_hours": "4200",
+        "power_cycles": "125",
+        "host_reads_bytes": "34000000000000",
+        "host_writes_bytes": "18000000000000",
+        "status": "Good",
+        "sampled_at": 1790856000.0,
+        "present": true,
+        "stale": true,
+        "fixture_only": true,
+        "attributes": [
+          {
+            "id": "01",
+            "name": "Critical warning",
+            "raw": "0",
+            "unit": "bit mask",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "02",
+            "name": "Composite temperature",
+            "raw": "38",
+            "unit": "°C",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "03",
+            "name": "Available spare",
+            "raw": "100",
+            "unit": "%",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "04",
+            "name": "Percentage used",
+            "raw": "6",
+            "unit": "%",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "05",
+            "name": "Data units read",
+            "raw": "66406250",
+            "unit": "512,000 bytes",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "06",
+            "name": "Data units written",
+            "raw": "35156250",
+            "unit": "512,000 bytes",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "07",
+            "name": "Power cycles",
+            "raw": "125",
+            "unit": "cycles",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "08",
+            "name": "Power on hours",
+            "raw": "4200",
+            "unit": "hours",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "09",
+            "name": "Unsafe shutdowns",
+            "raw": "2",
+            "unit": "events",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "0A",
+            "name": "Media and data integrity errors",
+            "raw": "0",
+            "unit": "errors",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          },
+          {
+            "id": "0B",
+            "name": "Large counter precision fixture",
+            "raw": "18446744073709551738",
+            "unit": "commands",
+            "current": null,
+            "worst": null,
+            "threshold": null
+          }
+        ],
+        "reasons": [
+          "Synthetic example. No health information from this computer was collected."
+        ],
+        "limitations": []
+      },
+      "history": [
+        {
+          "time": 1790850600.0,
+          "temperature_c": 36,
+          "remaining_percent": 94,
+          "status": "Good",
+          "power_on_hours": "4200"
+        },
+        {
+          "time": 1790851500.0,
+          "temperature_c": 37,
+          "remaining_percent": 94,
+          "status": "Good",
+          "power_on_hours": "4200"
+        },
+        {
+          "time": 1790852400.0,
+          "temperature_c": 38,
+          "remaining_percent": 94,
+          "status": "Good",
+          "power_on_hours": "4200"
+        },
+        {
+          "time": 1790853300.0,
+          "temperature_c": null,
+          "remaining_percent": 94,
+          "status": "Good",
+          "power_on_hours": "4200"
+        },
+        {
+          "time": 1790854200.0,
+          "temperature_c": 40,
+          "remaining_percent": 94,
+          "status": "Good",
+          "power_on_hours": "4200"
+        },
+        {
+          "time": 1790855100.0,
+          "temperature_c": 41,
+          "remaining_percent": 94,
+          "status": "Good",
+          "power_on_hours": "4200"
+        },
+        {
+          "time": 1790856000.0,
+          "temperature_c": 42,
+          "remaining_percent": 94,
+          "status": "Good",
+          "power_on_hours": "4200"
+        }
+      ],
+      "events": [
+        {
+          "time": 1790854200.0,
+          "status": "Caution",
+          "previous_status": "Good",
+          "reasons": [
+            "Synthetic temperature alert."
+          ]
+        },
+        {
+          "time": 1790856000.0,
+          "status": "Good",
+          "previous_status": "Caution",
+          "reasons": [
+            "Synthetic temperature recovery."
+          ]
+        }
+      ],
+      "fixture_only": true,
+      "probe_available": false,
+      "disabled_reason": "Synthetic preview only. Live collection is blocked.",
+      "read_only": true,
+      "model_calls": 0
+    },
+    "2222222222222222222222222222222222222222222222222222222222222222": {
+      "drive": {
+        "id": "2222222222222222222222222222222222222222222222222222222222222222",
+        "path": "fixture://drive-2",
+        "model": "Example archive HDD",
+        "serial": "SYNTHETIC-2",
+        "firmware": "DEMO.1",
+        "bus": "SATA",
+        "capacity_bytes": 1000000000000,
+        "source": "Synthetic fixture report",
+        "coverage": "smart",
+        "smart_passed": false,
+        "temperature_c": 42,
+        "remaining_percent": null,
+        "power_on_hours": null,
+        "power_cycles": null,
+        "host_reads_bytes": null,
+        "host_writes_bytes": null,
+        "status": "Caution",
+        "sampled_at": 1790856000.0,
+        "present": true,
+        "stale": true,
+        "fixture_only": true,
+        "attributes": [
+          {
+            "id": "05",
+            "name": "Reallocated sectors",
+            "raw": "12",
+            "raw_hex": "00000000000C",
+            "unit": "",
+            "current": 99,
+            "worst": 98,
+            "threshold": 10
+          },
+          {
+            "id": "09",
+            "name": "Power on time (vendor units)",
+            "raw": "17250",
+            "raw_hex": "000000004362",
+            "unit": "",
+            "current": 95,
+            "worst": 95,
+            "threshold": null
+          },
+          {
+            "id": "C2",
+            "name": "Temperature",
+            "raw": "42",
+            "raw_hex": "00000000002A",
+            "unit": "",
+            "current": 100,
+            "worst": 95,
+            "threshold": 0
+          },
+          {
+            "id": "C5",
+            "name": "Current pending sectors",
+            "raw": "2",
+            "raw_hex": "000000000002",
+            "unit": "",
+            "current": 100,
+            "worst": 100,
+            "threshold": 0
+          },
+          {
+            "id": "E7",
+            "name": "Unknown vendor attribute",
+            "raw": "124",
+            "raw_hex": "00000000007C",
+            "unit": "",
+            "current": 98,
+            "worst": 90,
+            "threshold": null
+          }
+        ],
+        "reasons": [
+          "Synthetic example: reallocated and pending sectors are present."
+        ],
+        "limitations": [
+          "Vendor-specific hour and endurance units are unknown."
+        ]
+      },
+      "history": [
+        {
+          "time": 1790850600.0,
+          "temperature_c": 36,
+          "remaining_percent": null,
+          "status": "Caution",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790851500.0,
+          "temperature_c": 37,
+          "remaining_percent": null,
+          "status": "Caution",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790852400.0,
+          "temperature_c": 38,
+          "remaining_percent": null,
+          "status": "Caution",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790853300.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Caution",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790854200.0,
+          "temperature_c": 40,
+          "remaining_percent": null,
+          "status": "Caution",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790855100.0,
+          "temperature_c": 41,
+          "remaining_percent": null,
+          "status": "Caution",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790856000.0,
+          "temperature_c": 42,
+          "remaining_percent": null,
+          "status": "Caution",
+          "power_on_hours": null
+        }
+      ],
+      "events": [],
+      "fixture_only": true,
+      "probe_available": false,
+      "disabled_reason": "Synthetic preview only. Live collection is blocked.",
+      "read_only": true,
+      "model_calls": 0
+    },
+    "3333333333333333333333333333333333333333333333333333333333333333": {
+      "drive": {
+        "id": "3333333333333333333333333333333333333333333333333333333333333333",
+        "path": "fixture://drive-3",
+        "model": "Example unsupported USB bridge",
+        "serial": "SYNTHETIC-3",
+        "firmware": "DEMO.1",
+        "bus": "USB",
+        "capacity_bytes": 1000000000000,
+        "source": "Synthetic fixture report",
+        "coverage": "unavailable",
+        "smart_passed": null,
+        "temperature_c": null,
+        "remaining_percent": null,
+        "power_on_hours": null,
+        "power_cycles": null,
+        "host_reads_bytes": null,
+        "host_writes_bytes": null,
+        "status": "Unknown",
+        "sampled_at": 1790856000.0,
+        "present": true,
+        "stale": true,
+        "fixture_only": true,
+        "attributes": [],
+        "reasons": [
+          "Synthetic example. No health information from this computer was collected."
+        ],
+        "limitations": [
+          "Synthetic unsupported bridge: no SMART telemetry is available."
+        ]
+      },
+      "history": [
+        {
+          "time": 1790850600.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Unknown",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790851500.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Unknown",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790852400.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Unknown",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790853300.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Unknown",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790854200.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Unknown",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790855100.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Unknown",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790856000.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Unknown",
+          "power_on_hours": null
+        }
+      ],
+      "events": [],
+      "fixture_only": true,
+      "probe_available": false,
+      "disabled_reason": "Synthetic preview only. Live collection is blocked.",
+      "read_only": true,
+      "model_calls": 0
+    },
+    "4444444444444444444444444444444444444444444444444444444444444444": {
+      "drive": {
+        "id": "4444444444444444444444444444444444444444444444444444444444444444",
+        "path": "fixture://drive-4",
+        "model": "Example disconnected SSD",
+        "serial": "SYNTHETIC-4",
+        "firmware": "DEMO.1",
+        "bus": "NVMe",
+        "capacity_bytes": 1000000000000,
+        "source": "Synthetic fixture report",
+        "coverage": "smart",
+        "smart_passed": true,
+        "temperature_c": null,
+        "remaining_percent": null,
+        "power_on_hours": null,
+        "power_cycles": null,
+        "host_reads_bytes": null,
+        "host_writes_bytes": null,
+        "status": "Good",
+        "sampled_at": 1790856000.0,
+        "present": false,
+        "stale": true,
+        "fixture_only": true,
+        "attributes": [],
+        "reasons": [
+          "Synthetic example. No health information from this computer was collected."
+        ],
+        "limitations": [
+          "Synthetic disconnected drive. Historical values do not indicate current health."
+        ]
+      },
+      "history": [
+        {
+          "time": 1790850600.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Good",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790851500.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Good",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790852400.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Good",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790853300.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Good",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790854200.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Good",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790855100.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Good",
+          "power_on_hours": null
+        },
+        {
+          "time": 1790856000.0,
+          "temperature_c": null,
+          "remaining_percent": null,
+          "status": "Good",
+          "power_on_hours": null
+        }
+      ],
+      "events": [],
+      "fixture_only": true,
+      "probe_available": false,
+      "disabled_reason": "Synthetic preview only. Live collection is blocked.",
+      "read_only": true,
+      "model_calls": 0
+    }
+  }
+}
