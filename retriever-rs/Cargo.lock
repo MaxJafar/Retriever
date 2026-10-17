@@ -1950,7 +1950,7 @@ version = "0.13.0-alpha.21-native"
 dependencies = [
  "anyhow",
  "axum",
- "base64 0.22.1",
+ "base64 0.23.1",
  "chrono",
  "futures-util",
  "globset",
@@ -1987,7 +1987,7 @@ name = "retriever-protocol"
 version = "0.13.0-alpha.21-native"
 dependencies = [
  "anyhow",
- "base64 0.22.1",
+ "base64 0.23.1",
  "hex",
  "serde",
  "serde_json",

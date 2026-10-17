@@ -11,7 +11,7 @@ rust-version = "1.90"
 [workspace.dependencies]
 anyhow = "1"
 axum = { version = "0.8", features = ["json", "macros"] }
-base64 = "0.22"
+base64 = "0.23"
 clap = { version = "4", features = ["derive", "env"] }
 futures-util = "0.3"
 globset = "0.4"
