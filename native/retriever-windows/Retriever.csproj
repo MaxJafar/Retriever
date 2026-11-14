@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Windows.SDK.BuildTools.MSIX" Version="1.7.20250829.1"/>
     <PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.240923002"/>
-    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742"/>
+    <PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.28000.2957"/>
     <Content Include="Retriever.png"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
     <Content Include="../../release/repository.json" Link="repository.json"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
     <Content Include="Retriever.ico"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></Content>
